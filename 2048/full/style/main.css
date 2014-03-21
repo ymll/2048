@@ -428,8 +428,8 @@ hr {
       .tile.tile-64 .tile-inner {
         font-size: 20px; } }
     @media screen and (max-width: 520px) {
-      .tile.tile-512 .tile-inner {
-        font-size: 16px; } }
+      .tile.tile-256 .tile-inner {
+        font-size: 15px; } }
     @media screen and (max-width: 520px) {
       .tile.tile-2048 .tile-inner {
         font-size: 20px;
