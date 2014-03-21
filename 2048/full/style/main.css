@@ -426,14 +426,14 @@ hr {
 
     @media screen and (max-width: 520px) {
       .tile.tile-64 .tile-inner {
-        font-size: 8px; } }
+        font-size: 20px; } }
     @media screen and (max-width: 520px) {
       .tile.tile-512 .tile-inner {
-        font-size: 8px; } }
+        font-size: 16px; } }
     @media screen and (max-width: 520px) {
       .tile.tile-2048 .tile-inner {
-        font-size: 8px;
-        line-height:10px; } }
+        font-size: 20px;
+        line-height:24px; } }
 
 @-webkit-keyframes appear {
   0% {
@@ -776,7 +776,7 @@ hr {
     margin-top: 20px; }
 
   .tile .tile-inner {
-    font-size: 38px; }
+    font-size: 30px; }
 
   .game-message p {
     font-size: 30px !important;
