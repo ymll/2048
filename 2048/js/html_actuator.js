@@ -63,7 +63,7 @@ HTMLActuator.prototype.addTile = function (tile) {
   text[7] = "聯合";
   text[8] = "新亞";
   text[9] = "崇基";
-  text[10] = "中文"<br>"大學";
+  text[10] = "中文大學";
   text[11] = "崇基";
   text[12] = "新亞";
   text[13] = "聯合";
@@ -163,15 +163,12 @@ HTMLActuator.prototype.message = function (won) {
   mytxt[7]="明德新民";
   mytxt[8]="誠明";
   mytxt[9]="止於至善";
-  mytxt[10]="还是朱元璋厉害……";
-  mytxt[11]="天地会的弟兄们，反清复明啊！";
-  mytxt[12]="连辛亥革命的黎明都没等到……";
-  mytxt[13]="看不到天朝的太阳了 = =";
+
 
 
   var text3 = function (m) { var r = 0; while (m > 1) r++, m >>= 1; return r; }
   var type    = won ? "game-won" : "game-over";
-  var message = won ? "博文約禮"<br>"中大歡迎你！" : mytxt[text3(maxscore)-3];
+  var message = won ? "中大歡迎你！" : mytxt[text3(maxscore)-3];
 
   if (typeof ga !== "undefined") {
     ga("send", "event", "game", "end", type, this.score);
