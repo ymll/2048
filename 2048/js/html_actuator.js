@@ -152,7 +152,7 @@ HTMLActuator.prototype.updateBestScore = function (bestScore) {
 };
 
 HTMLActuator.prototype.message = function (won) {
-  var mytxt=new Array(14);
+  var mytxt=new Array(10);
   mytxt[0]=" ";
   mytxt[1]="我哋DEM返個和聲beat先啦";
   mytxt[2]="博學篤行";
