@@ -153,16 +153,15 @@ HTMLActuator.prototype.updateBestScore = function (bestScore) {
 
 HTMLActuator.prototype.message = function (won) {
   var mytxt=new Array(10);
-  mytxt[0]=" ";
-  mytxt[1]="我哋DEM返個和聲beat先啦";
-  mytxt[2]="博學篤行";
-  mytxt[3]="修己澤人，儲才濟世";
-  mytxt[4]="文行忠信";
-  mytxt[5]="博學、進德、濟民";
-  mytxt[6]="修德講學";
-  mytxt[7]="明德新民";
-  mytxt[8]="誠明";
-  mytxt[9]="止於至善";
+  mytxt[0]="我哋DEM返個和聲beat先啦";
+  mytxt[1]="博學篤行";
+  mytxt[2]="修己澤人，儲才濟世";
+  mytxt[3]="文行忠信";
+  mytxt[4]="博學、進德、濟民";
+  mytxt[5]="修德講學";
+  mytxt[6]="明德新民";
+  mytxt[7]="誠明";
+  mytxt[8]="止於至善";
 
 
 
