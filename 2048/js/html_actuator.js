@@ -54,7 +54,7 @@ HTMLActuator.prototype.clearContainer = function (container) {
 HTMLActuator.prototype.addTile = function (tile) {
   var text=new Array(20);
   text[0] = " ";
-  text[1] = "和聲";
+  text[1] = "和"<br>"聲";
   text[2] = "伍宜孫";
   text[3] = "敬文";
   text[4] = "善衡";
@@ -63,7 +63,7 @@ HTMLActuator.prototype.addTile = function (tile) {
   text[7] = "聯合";
   text[8] = "新亞";
   text[9] = "崇基";
-  text[10] = "中文<br>大學";
+  text[10] = "中文"<br>"大學";
   text[11] = "崇基";
   text[12] = "新亞";
   text[13] = "聯合";
@@ -153,16 +153,16 @@ HTMLActuator.prototype.updateBestScore = function (bestScore) {
 
 HTMLActuator.prototype.message = function (won) {
   var mytxt=new Array(14);
-  mytxt[0]="连秦始皇都见不到了T.T";
-  mytxt[1]="曹贼你还我大汉江山！";
-  mytxt[2]="都是赵高害得我！";
-  mytxt[3]="司马老儿果然奸诈！";
-  mytxt[4]="江山难坐啊！";
-  mytxt[5]="明朝天下一统，可惜看不到了！";
-  mytxt[6]="毁在杨广手里了……";
-  mytxt[7]="安史之乱亡我大唐……";
-  mytxt[8]="赵匡胤黄袍加身，兵不血刃啊！";
-  mytxt[9]="元人铁蹄果然厉害！";
+  mytxt[0]=" ";
+  mytxt[1]="我哋DEM返個和聲beat先啦";
+  mytxt[2]="博學篤行";
+  mytxt[3]="修己澤人，儲才濟世";
+  mytxt[4]="文行忠信";
+  mytxt[5]="博學、進德、濟民";
+  mytxt[6]="修德講學";
+  mytxt[7]="明德新民";
+  mytxt[8]="誠明";
+  mytxt[9]="止於至善";
   mytxt[10]="还是朱元璋厉害……";
   mytxt[11]="天地会的弟兄们，反清复明啊！";
   mytxt[12]="连辛亥革命的黎明都没等到……";
@@ -171,7 +171,7 @@ HTMLActuator.prototype.message = function (won) {
 
   var text3 = function (m) { var r = 0; while (m > 1) r++, m >>= 1; return r; }
   var type    = won ? "game-won" : "game-over";
-  var message = won ? "博文約禮<br>中大歡迎你！" : mytxt[text3(maxscore)-3];
+  var message = won ? "博文約禮"<br>"中大歡迎你！" : mytxt[text3(maxscore)-3];
 
   if (typeof ga !== "undefined") {
     ga("send", "event", "game", "end", type, this.score);
