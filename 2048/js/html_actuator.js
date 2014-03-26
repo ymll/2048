@@ -155,15 +155,15 @@ HTMLActuator.prototype.message = function (won) {
   var mytxt=new Array(11);
   mytxt[0]="我哋DEM返個和聲beat好唔好呀?";
   mytxt[1]="DEM返個和聲beat先啦";
-  mytxt[2]="我哋DEM返個和聲beat好唔好呀?";
-  mytxt[3]="和聲";
-  mytxt[4]="和盡天地風雲之聲 ";
-  mytxt[5]="環抱山水日月之景";
-  mytxt[6]="婆娑樹影　人傑地靈";
-  mytxt[7]="育和聲一代菁英";
-  mytxt[8]="立和聲千秋美名";
+  mytxt[2]="和！聲！";
+  mytxt[3]="我哋DEM返個和聲beat好唔好呀！？";
+  mytxt[4]="和盡天地風雲之聲！";
+  mytxt[5]="環抱山水日月之景！";
+  mytxt[6]="婆娑樹影！人傑地靈！";
+  mytxt[7]="育和聲一代菁英！";
+  mytxt[8]="立和聲千秋美名！";
   mytxt[9]="和聲!和聲!和聲!";
-  mytxt[10]="URRSH";
+  mytxt[10]="URRSH！";
 
 
 
