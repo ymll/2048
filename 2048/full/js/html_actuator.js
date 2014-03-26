@@ -63,7 +63,12 @@ HTMLActuator.prototype.addTile = function (tile) {
   text[7] = "聯合";
   text[8] = "崇基";
   text[9] = "新亞";
-  text[10] = " ";
+  text[10] = "中文大學";
+  text[11] = "NA";
+  text[12] = "CC";
+  text[13] = "UC";
+  text[14] = "Shaw";
+  text[15] = " ";
   var self = this;
   var text2 = function (n) { var r = 0; while (n > 1) r++, n >>= 1; return r; }
 
