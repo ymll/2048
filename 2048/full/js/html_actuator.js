@@ -52,7 +52,7 @@ HTMLActuator.prototype.clearContainer = function (container) {
 };
 
 HTMLActuator.prototype.addTile = function (tile) {
-  var text=new Array(18);
+  var text=new Array(20);
   text[0] = " ";
   text[1] = "和聲";
   text[2] = "伍宜孫";
@@ -61,14 +61,18 @@ HTMLActuator.prototype.addTile = function (tile) {
   text[5] = "晨興";
   text[6] = "逸夫";
   text[7] = "聯合";
-  text[8] = "崇基";
-  text[9] = "新亞";
-  text[10] = "中文大學";
-  text[11] = "NA";
-  text[12] = "CC";
-  text[13] = "UC";
-  text[14] = "Shaw";
-  text[15] = " ";
+  text[8] = "新亞";
+  text[9] = "崇基";
+  text[10] = "中文<br>大學";
+  text[11] = "崇基";
+  text[12] = "新亞";
+  text[13] = "聯合";
+  text[14] = "逸夫";
+  text[15] = "晨興";
+  text[16] = "善衡";
+  text[17] = "敬文";
+  text[18] = "伍宜孫";
+  text[19] = "和聲";
   var self = this;
   var text2 = function (n) { var r = 0; while (n > 1) r++, n >>= 1; return r; }
 
@@ -167,7 +171,7 @@ HTMLActuator.prototype.message = function (won) {
 
   var text3 = function (m) { var r = 0; while (m > 1) r++, m >>= 1; return r; }
   var type    = won ? "game-won" : "game-over";
-  var message = won ? "中华人民共和国万岁！" : mytxt[text3(maxscore)-3];
+  var message = won ? "中大歡迎你！" : mytxt[text3(maxscore)-3];
 
   if (typeof ga !== "undefined") {
     ga("send", "event", "game", "end", type, this.score);
