@@ -52,7 +52,7 @@ HTMLActuator.prototype.clearContainer = function (container) {
 };
 
 HTMLActuator.prototype.addTile = function (tile) {
-  var text=new Array(11);
+  var text=new Array(12);
   text[0] = " ";
   text[1] = "生";
   text[2] = "日";
@@ -64,6 +64,7 @@ HTMLActuator.prototype.addTile = function (tile) {
   text[8] = "哈哈"+"哈哈";
   text[9] = "Happy";
   text[10] = "Birthday";
+  text[11] = "Happy Birthday";
 
   var self = this;
   var text2 = function (n) { var r = 0; while (n > 1) r++, n >>= 1; return r; }
