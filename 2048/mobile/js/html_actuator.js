@@ -48,7 +48,7 @@ HTMLActuator.prototype.clearContainer = function (container) {
 
 HTMLActuator.prototype.addTile = function (tile) {
 
-  var text=new Array(20);
+  var text=new Array(21);
   text[0] = " ";
   text[1] = "和聲";
   text[2] = "伍宜孫";
