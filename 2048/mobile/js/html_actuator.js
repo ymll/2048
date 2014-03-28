@@ -47,6 +47,32 @@ HTMLActuator.prototype.clearContainer = function (container) {
 };
 
 HTMLActuator.prototype.addTile = function (tile) {
+
+  var text=new Array(20);
+  text[0] = " ";
+  text[1] = "和聲";
+  text[2] = "伍宜孫";
+  text[3] = "敬文";
+  text[4] = "善衡";
+  text[5] = "晨興";
+  text[6] = "逸夫";
+  text[7] = "聯合";
+  text[8] = "新亞";
+  text[9] = "崇基";
+  text[10] = "中大";
+  text[11] = "崇基";
+  text[12] = "新亞";
+  text[13] = "聯合";
+  text[14] = "逸夫";
+  text[15] = "晨興";
+  text[16] = "善衡";
+  text[17] = "敬文";
+  text[18] = "伍宜孫";
+  text[19] = "和聲";
+
+  var text2 = function (n) { var r = 0; while (n > 1) r++, n >>= 1; return r; }
+  
+  
   var self = this;
 
   var wrapper   = document.createElement("div");
@@ -62,7 +88,7 @@ HTMLActuator.prototype.addTile = function (tile) {
   this.applyClasses(wrapper, classes);
 
   inner.classList.add("tile-inner");
-  inner.textContent = tile.value;
+  inner.textContent = text[text2(tile.value)];
 
   if (tile.previousPosition) {
     // Make sure that the tile gets rendered in the previous position first
