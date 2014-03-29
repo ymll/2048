@@ -367,7 +367,7 @@ hr {
     font-size: 30px; }
     @media screen and (max-width: 520px) {
       .tile.tile-super .tile-inner {
-        font-size: 10px; } }
+        font-size: 15px; } }
 
 @-webkit-keyframes appear {
   0% {
@@ -502,7 +502,7 @@ hr {
     padding: 0 20px; }
 
   h1.title {
-    font-size: 27px;
+    font-size: 30px;
     margin-top: 15px; }
 
   .container {
@@ -691,7 +691,7 @@ hr {
     transform: translate(202px, 202px); }
 
   .tile .tile-inner {
-    font-size: 25px; }
+    font-size: 22px; }
 
   .game-message p {
     font-size: 30px !important;
