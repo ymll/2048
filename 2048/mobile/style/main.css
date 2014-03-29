@@ -311,7 +311,7 @@ hr {
     text-align: center;
     font-weight: bold;
     z-index: 10;
-    font-size: 34x; }
+    font-size: 34px; }
   .tile.tile-2 .tile-inner {
     background: #eee4da;
     box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0), inset 0 0 0 1px rgba(255, 255, 255, 0); }
@@ -363,9 +363,7 @@ hr {
     background: #edc53f;
     box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.47619), inset 0 0 0 1px rgba(255, 255, 255, 0.28571);
     font-size: 35px; }
-    @media screen and (max-width: 520px) {
-      .tile.tile-1024 .tile-inner {
-        font-size: 15px; } }
+    
   .tile.tile-2048 .tile-inner {
     color: #f9f6f2;
     background: #edc22e;
