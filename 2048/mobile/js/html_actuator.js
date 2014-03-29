@@ -1,4 +1,4 @@
-﻿function HTMLActuator() {
+function HTMLActuator() {
   this.tileContainer    = document.querySelector(".tile-container");
   this.scoreContainer   = document.querySelector(".score-container");
   this.bestContainer    = document.querySelector(".best-container");
@@ -52,7 +52,27 @@ HTMLActuator.prototype.clearContainer = function (container) {
 };
 
 HTMLActuator.prototype.addTile = function (tile) {
-  var text = " 商周秦汉唐宋元明清　　";
+  var text=new Array(20);
+  text[0] = " ";
+  text[1] = "和聲";
+  text[2] = "伍宜孫";
+  text[3] = "敬文";
+  text[4] = "善衡";
+  text[5] = "晨興";
+  text[6] = "逸夫";
+  text[7] = "聯合";
+  text[8] = "新亞";
+  text[9] = "崇基";
+  text[10] = "中大";
+  text[11] = "崇基";
+  text[12] = "新亞";
+  text[13] = "聯合";
+  text[14] = "逸夫";
+  text[15] = "晨興";
+  text[16] = "善衡";
+  text[17] = "敬文";
+  text[18] = "伍宜孫";
+  text[19] = "和聲";
   var self = this;
   var text2 = function (n) { var r = 0; while (n > 1) r++, n >>= 1; return r; }
 
@@ -64,12 +84,12 @@ HTMLActuator.prototype.addTile = function (tile) {
   // We can't use classlist because it somehow glitches when replacing classes
   var classes = ["tile", "tile-" + tile.value, positionClass];
 
-  if (tile.value > 2048) classes.push("tile-super");
+  if (tile.value > 131072) classes.push("tile-super");
 
   this.applyClasses(wrapper, classes);
 
   inner.classList.add("tile-inner");
-  inner.textContent = text[text2(tile.value)];
+  inner.innerHTML = text[text2(tile.value)];
 
   if (tile.previousPosition) {
     // Make sure that the tile gets rendered in the previous position first
@@ -132,21 +152,24 @@ HTMLActuator.prototype.updateBestScore = function (bestScore) {
 };
 
 HTMLActuator.prototype.message = function (won) {
-  var mytxt=new Array(9);
-  mytxt[0]="连秦始皇都见不到了T.T";
-  mytxt[1]="都是赵高害得我！";
-  mytxt[2]="曹贼你还我大汉江山！";
-  mytxt[3]="安史之乱亡我大唐……";
-  mytxt[4]="元人铁蹄果然厉害！";
-  mytxt[5]="还是朱元璋厉害……";
-  mytxt[6]="天地会的弟兄们，反清复明啊！";
-  mytxt[7]="连辛亥革命的黎明都没等到……";
-  mytxt[8]="看不到天朝的太阳了 = =";
+  var mytxt=new Array(11);
+  mytxt[0]="我哋DEM返個和聲beat好唔好呀?";
+  mytxt[1]="DEM返個和聲beat先啦";
+  mytxt[2]="和！聲！";
+  mytxt[3]="我哋DEM返個和聲beat好唔好呀！？";
+  mytxt[4]="和盡天地風雲之聲！";
+  mytxt[5]="環抱山水日月之景！";
+  mytxt[6]="婆娑樹影！人傑地靈！";
+  mytxt[7]="育和聲一代菁英！";
+  mytxt[8]="立和聲千秋美名！";
+  mytxt[9]="和聲!和聲!和聲!";
+  mytxt[10]="URRSH！";
+
 
 
   var text3 = function (m) { var r = 0; while (m > 1) r++, m >>= 1; return r; }
   var type    = won ? "game-won" : "game-over";
-  var message = won ? "中华人民共和国万岁！" : mytxt[text3(maxscore)-2];
+  var message = won ? "中大歡迎你！" : mytxt[text3(maxscore)-3];
 
   if (typeof ga !== "undefined") {
     ga("send", "event", "game", "end", type, this.score);
@@ -170,13 +193,13 @@ HTMLActuator.prototype.scoreTweetButton = function () {
   var tweet = document.createElement("a");
   tweet.classList.add("twitter-share-button");
   tweet.setAttribute("href", "https://twitter.com/share");
-  tweet.setAttribute("data-via", "oprilzeng");
-  tweet.setAttribute("data-url", "http://oprilzeng.github.io/2048");
-  tweet.setAttribute("data-counturl", "http://oprilzeng.github.io/2048/");
+  tweet.setAttribute("data-via", "ymll");
+  tweet.setAttribute("data-url", "http://ymll.github.io/2048/full");
+  tweet.setAttribute("data-counturl", "http://ymll.github.io/2048/");
   tweet.textContent = "Tweet";
 
-  var text = "I scored " + this.score + " points at PRC2048, a game where you " +
-             "join numbers to score high! #PRC2048";
+  var text = "I scored " + this.score + " points in 2048-CUHK edition, a game where you " +
+             "join numbers to score high! #CUHK2048";
   tweet.setAttribute("data-text", text);
 
   return tweet;
