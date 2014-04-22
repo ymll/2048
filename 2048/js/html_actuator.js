@@ -63,16 +63,10 @@ HTMLActuator.prototype.addTile = function (tile) {
   text[7] = "聯合";
   text[8] = "新亞";
   text[9] = "崇基";
-  text[10] = "中大";
-  text[11] = "崇基";
-  text[12] = "新亞";
-  text[13] = "聯合";
-  text[14] = "逸夫";
-  text[15] = "晨興";
-  text[16] = "善衡";
-  text[17] = "敬文";
-  text[18] = "伍宜孫";
-  text[19] = "和聲";
+  text[10] = "走讀";
+  text[11] = "中大";
+  text[12] = "過三";
+  text[13] = "爆四";
   var self = this;
   var text2 = function (n) { var r = 0; while (n > 1) r++, n >>= 1; return r; }
 
@@ -169,7 +163,7 @@ HTMLActuator.prototype.message = function (won) {
 
   var text3 = function (m) { var r = 0; while (m > 1) r++, m >>= 1; return r; }
   var type    = won ? "game-won" : "game-over";
-  var message = won ? "中大歡迎你！" : mytxt[text3(maxscore)-3];
+  var message = won ? "爆四需苦幹！" : mytxt[text3(maxscore)-3];
 
   if (typeof ga !== "undefined") {
     ga("send", "event", "game", "end", type, this.score);
