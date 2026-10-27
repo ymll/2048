@@ -14,6 +14,23 @@ window.requestAnimationFrame(function () {
     window.CUHK2048I18N.applyLanguage();
   }
 
+  // Restart button (top right, next to the "?" and EN toggle). A
+  // fresh game wipes the current board, so a tap asks first — one
+  // wrong tap should never throw a good game away.
+  var restartButton = document.getElementById("restart-button");
+  if (restartButton) {
+    restartButton.addEventListener("click", function () {
+      var message = window.CUHK2048I18N
+        ? window.CUHK2048I18N.t("restartConfirm")
+        : "Start a new game?";
+      if (typeof window.confirm !== "function" || window.confirm(message)) {
+        if (window.gameManager) {
+          window.gameManager.restart();
+        }
+      }
+    });
+  }
+
   // FAQ modal: the tile order is a surprise, so the FAQ and the
   // college ladder stay hidden in a <dialog> until the player opens
   // them. <dialog> gives Esc-to-close and a backdrop for free;

@@ -65,6 +65,8 @@
       shareText: "我在 CUHK 2048 得到 {score} 分，拼到{tile}！",
       faqHeading: "常見問題",
       faqButtonTitle: "常見問題",
+      restartTitle: "重新開始",
+      restartConfirm: "要重新開始嗎？目前的遊戲進度將會消失。",
       faqClose: "關閉",
       faqQ1: "甚麼是 CUHK 2048？",
       faqA1: "CUHK 2048（中大加強版）是免費的網上 2048 拼圖遊戲，方塊是香港中文大學的書院。合併書院方塊，拼到 2048 的中大，再挑戰 8192 的爆四。",
@@ -97,6 +99,8 @@
       shareText: "I scored {score} points and reached {tile} in CUHK 2048! #CUHK2048",
       faqHeading: "Frequently asked questions",
       faqButtonTitle: "Frequently asked questions",
+      restartTitle: "Restart",
+      restartConfirm: "Start a new game? Your current progress will be lost.",
       faqClose: "Close",
       faqQ1: "What is CUHK 2048?",
       faqA1: "CUHK 2048 is a free online 2048 puzzle game where the tiles are colleges of the Chinese University of Hong Kong. Merge the college tiles to reach CUHK at 2048, then keep going to GPA 4.0 at 8192.",
@@ -188,6 +192,11 @@
       var faqOpen = document.getElementById("faq-open");
       if (faqOpen) {
         faqOpen.setAttribute("title", t("faqButtonTitle"));
+      }
+      // The restart icon's tooltip switches language too.
+      var restartBtn = document.getElementById("restart-button");
+      if (restartBtn) {
+        restartBtn.setAttribute("title", t("restartTitle"));
       }
     }
 

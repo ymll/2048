@@ -579,6 +579,32 @@ hr {
   .faq-button:hover {
     background: #776e65; }
 
+/* Restart — a circular-arrow icon in the top bar, next to "?" and
+   the language toggle. It starts a new game, but only after the
+   player confirms, so a misclick can't throw a game away. */
+.restart-button {
+  width: 30px;
+  height: 30px;
+  margin-right: 8px;
+  padding: 0;
+  background: #8f7a66;
+  color: #f9f6f2;
+  border: 0;
+  border-radius: 50%;
+  font-size: 16px;
+  line-height: 30px;
+  text-align: center;
+  cursor: pointer; }
+  .restart-button:hover {
+    background: #776e65; }
+  .restart-button::before {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: -2px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f9f6f2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='1 4 1 10 7 10'/%3E%3Cpath d='M3.51 15a9 9 0 1 0 2.13-9.36L1 10'/%3E%3C/svg%3E") no-repeat center / contain; }
+
 .faq-dialog {
   max-width: 520px;
   width: calc(100% - 40px);
