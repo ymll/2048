@@ -72,45 +72,25 @@ KeyboardInputManager.prototype.listen = function () {
   // .keep-playing-button = Continue — Stage 1 (2048) only; the button
   //   is hidden by CSS on the final (8192) overlay, and GameManager
   //   also ignores keepPlaying once 8192 is reached.
-  // .share-button = Instagram image share (native share sheet with
-  //   the PNG card, else download the PNG + copy the text)
-  // .threads-button is a plain link (href set by HTMLActuator) — no
-  //   JS binding needed for its click, but on touch screens it gets
-  //   an explicit touchend handler: preventDefault() there stops the
-  //   browser from also firing a synthetic click, and the link is
-  //   opened directly, so a tap opens Threads exactly once.
-  //   (The game-container touchstart handler above no longer blocks
-  //   taps on the overlay either — both fixes together are why the
-  //   link works on phones now.)
-  // (The old Copy button was removed: sharing already copies the
-  //   text in its desktop fallback, so a separate Copy button was
-  //   redundant. copyScore/copyTextToClipboard stay for that
-  //   fallback — see HTMLActuator.shareImage.)
+  // .share-button = share the PNG card (native share sheet with
+  //   the image, else download the PNG + copy the text)
+  // (The old Threads link and Copy button were removed: the share
+  //   sheet on mobile already offers Threads, and sharing already
+  //   copies the text in its desktop fallback.)
   this.bindButton(".retry-button", "restart");
   this.bindButton(".keep-playing-button", "keepPlaying");
   this.bindButton(".share-button", "shareInstagram");
-
-  var threadsButton = document.querySelector(".threads-button");
-  if (threadsButton) {
-    threadsButton.addEventListener("touchend", function (event) {
-      if (event) event.preventDefault();
-      var href = threadsButton.getAttribute("href");
-      if (href && typeof window !== "undefined" &&
-          typeof window.open === "function") {
-        window.open(href, "_blank");
-      }
-    });
-  }
 
   // Listen to swipe events
   var touchStartClientX, touchStartClientY;
   var gameContainer = document.getElementsByClassName("game-container")[0];
 
   // Touches on the win / game-over overlay (Continue, Start over,
-  // Instagram, Threads, Copy) must keep their normal tap behaviour:
+  // Share screenshot) must keep their normal tap behaviour:
   // preventDefault() on touchstart stops the browser from ever
-  // firing a click, which is why the Threads link — the only overlay
-  // control without its own touch handler — did nothing on phones.
+  // firing a click. (Kept from the old Threads-link fix: the overlay
+  // used to hold a plain link with no touch handler, and taps on it
+  // did nothing on phones.)
   // Swipes on the board itself still get preventDefault() so the
   // page does not scroll while playing.
   function touchIsOnOverlay(event) {

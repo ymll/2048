@@ -1,8 +1,9 @@
 // CUHK 2048 — renders the board and the win / game-over overlay.
-// Share is Instagram + Threads only.
-// Instagram has no web share URL, so it uses the native Web Share sheet
-// (navigator.share) and falls back to copy-to-clipboard; Threads uses
-// its web intent link (threads.net/intent/post).
+// Share is one image-first button ("Share screenshot"): on mobile the
+// native Web Share sheet offers Instagram / Threads / etc., on
+// desktop the PNG downloads and the share text is copied. There is
+// no per-network button — Instagram has no web share URL, and a
+// separate Threads link next to it looked redundant.
 
 // Fallback tile names (used only if js/i18n.js has not loaded).
 var ZH_TILE_NAMES = {
@@ -240,8 +241,6 @@ HTMLActuator.prototype.message = function (metadata) {
 
   var retry = this.messageContainer.querySelector(".retry-button");
   if (retry) retry.textContent = retryLabel;
-
-  this.updateThreadsLink(this.score, metadata.maxTile || this.maxTile);
 };
 
 HTMLActuator.prototype.clearMessage = function () {
@@ -251,22 +250,6 @@ HTMLActuator.prototype.clearMessage = function () {
   this.messageContainer.classList.remove("game-won-cuhk");
   this.messageContainer.classList.remove("game-won-final");
   this.messageContainer.classList.remove("game-over");
-};
-
-HTMLActuator.prototype.updateThreadsLink = function (score, maxTile) {
-  if (typeof document === "undefined" || !document.querySelector) return;
-  var link = document.querySelector(".threads-button");
-  if (!link) return;
-  var i18n = this.i18n();
-  var href;
-  if (i18n && typeof i18n.threadsUrl === "function") {
-    href = i18n.threadsUrl(score, maxTile);
-  } else {
-    href = "https://www.threads.net/intent/post?text=" +
-      encodeURIComponent(this.shareTextWithUrl(score, maxTile)) +
-      "&url=" + encodeURIComponent(this.gameUrl());
-  }
-  link.setAttribute("href", href);
 };
 
 HTMLActuator.prototype.copyTextToClipboard = function (text, button, feedbackKey) {
@@ -384,7 +367,6 @@ HTMLActuator.prototype.showTemporaryFeedback = function (button, feedbackKey, ms
 // with the PNG + text (on mobile the player picks Instagram or
 // Threads there). (2) Otherwise download the PNG and copy the
 // share text, so the player can post it to IG / Threads manually.
-// The Threads text link in the overlay stays as a secondary option.
 HTMLActuator.prototype.shareImage = function (score, maxTile, button) {
   var self = this;
   var s = score === undefined ? this.score : score;

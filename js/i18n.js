@@ -1,8 +1,8 @@
 // CUHK 2048 — language support (EN / 中文).
 // Default is zh-Hant, the site's original language. The choice is saved
 // in localStorage ("cuhk2048-lang") so it survives reloads.
-// Share here is Threads (web intent link) and Instagram
-// (native Web Share sheet, otherwise copy-to-clipboard).
+// Share is one image-first button: the native Web Share sheet on
+// mobile (Instagram / Threads / etc.), otherwise download + copy.
 
 (function () {
   var LANG_KEY = "cuhk2048-lang";
@@ -56,7 +56,6 @@
       tryAgain: "再玩一次",
       startOver: "重新開始",
       shareScreenshot: "分享截圖",
-      threads: "Threads",
       copied: "已複製！",
       copiedInstagram: "已複製 — 貼到 Instagram",
       imageDownloaded: "圖片已下載 — 去 IG / Threads 分享",
@@ -89,7 +88,6 @@
       tryAgain: "Try again",
       startOver: "Start over",
       shareScreenshot: "Share screenshot",
-      threads: "Threads",
       copied: "Copied!",
       copiedInstagram: "Copied — paste it in Instagram",
       imageDownloaded: "Image downloaded — post it to IG / Threads",
@@ -151,17 +149,6 @@
 
   function shareTextWithUrl(score, maxTile) {
     return shareText(score, maxTile) + " " + GAME_URL;
-  }
-
-  function threadsUrl(score, maxTile) {
-    // Threads web intent. The text already carries the game URL
-    // (see shareTextWithUrl), and the intent endpoint only takes
-    // "text" — there is no separate "url" parameter.
-    // Instagram has no equivalent web URL, so it is handled
-    // separately via navigator.share() / clipboard (see
-    // HTMLActuator.shareToInstagram).
-    return "https://www.threads.net/intent/post?text=" +
-      encodeURIComponent(shareTextWithUrl(score, maxTile));
   }
 
   function applyLanguage() {
@@ -232,7 +219,6 @@
     tileNameForLang: tileNameForLang,
     shareText: shareText,
     shareTextWithUrl: shareTextWithUrl,
-    threadsUrl: threadsUrl,
     gameUrl: GAME_URL
   };
 })();
