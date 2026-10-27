@@ -13,11 +13,53 @@ function GameManager(size, InputManager, Actuator, ScoreManager) {
   this.inputManager.on("shareInstagram", this.shareInstagram.bind(this));
   this.inputManager.on("copy", this.copy.bind(this));
 
-  this.setup();
+  // Auto-save: resume a saved game if there is one, otherwise start
+  // a new game. A corrupt / missing save just starts a new game.
+  if (!this.restoreSavedGame()) {
+    this.setup();
+  }
 }
+
+// Save the current game, if the save helper is loaded.
+GameManager.prototype.saveGame = function () {
+  if (typeof window !== "undefined" && window.CUHK2048Save) {
+    window.CUHK2048Save.saveGame(this);
+  }
+};
+
+// Restore a saved game (board, score, win / game-over state).
+// Returns true if a valid save was restored, false otherwise.
+GameManager.prototype.restoreSavedGame = function () {
+  if (typeof window === "undefined" || !window.CUHK2048Save) return false;
+  var save = window.CUHK2048Save.loadGame(this.size);
+  if (!save) return false;
+
+  this.grid = new Grid(this.size);
+  this.score = save.score;
+  this.over = save.over;
+  this.won2048 = save.won2048;
+  this.won8192 = save.won8192;
+  this.continued2048 = save.continued2048;
+  this.maxTile = save.maxTile;
+
+  var self = this;
+  save.tiles.forEach(function (t) {
+    var tile = new Tile({ x: t.x, y: t.y }, t.value);
+    self.grid.insertTile(tile);
+    if (t.value > self.maxTile) self.maxTile = t.value;
+  });
+
+  this.actuate();
+  return true;
+};
 
 // Restart the game
 GameManager.prototype.restart = function () {
+  // Start over clears the save, so a reload does not bring the
+  // old game back.
+  if (typeof window !== "undefined" && window.CUHK2048Save) {
+    window.CUHK2048Save.clearGame();
+  }
   this.maxTile = 2;
   this.actuator.continue();
   this.setup();
@@ -31,6 +73,8 @@ GameManager.prototype.keepPlaying = function () {
   if (!this.won2048 || this.won8192) return;
   this.continued2048 = true;
   this.actuator.continue();
+  // Save, so a reload does not show the Stage 1 pause again.
+  this.saveGame();
 };
 
 // Share the current score. These do not resume the game: the
@@ -80,6 +124,10 @@ GameManager.prototype.setup = function () {
 
   // Update the actuator
   this.actuate();
+
+  // Save the fresh game, so closing the tab before the first move
+  // still resumes it.
+  this.saveGame();
 };
 
 // Set up the initial tiles to start the game with
@@ -204,6 +252,10 @@ GameManager.prototype.move = function (direction) {
     }
 
     this.actuate();
+
+    // Auto-save after every move, so pausing and coming back
+    // resumes exactly here.
+    this.saveGame();
   }
 };
 
