@@ -13,4 +13,41 @@ window.requestAnimationFrame(function () {
     });
     window.CUHK2048I18N.applyLanguage();
   }
+
+  // FAQ modal: the tile order is a surprise, so the FAQ and the
+  // college ladder stay hidden in a <dialog> until the player opens
+  // them. <dialog> gives Esc-to-close and a backdrop for free;
+  // on a browser without showModal() it falls back to a plain
+  // open dialog.
+  var faqDialog = document.getElementById("faq-dialog");
+  var faqOpen = document.getElementById("faq-open");
+  var faqClose = document.getElementById("faq-close");
+  if (faqDialog && faqOpen) {
+    faqOpen.addEventListener("click", function () {
+      if (typeof faqDialog.showModal === "function") {
+        faqDialog.showModal();
+      } else {
+        faqDialog.setAttribute("open", "");
+      }
+    });
+  }
+  if (faqDialog && faqClose) {
+    faqClose.addEventListener("click", function () {
+      if (typeof faqDialog.close === "function") {
+        faqDialog.close();
+      } else {
+        faqDialog.removeAttribute("open");
+      }
+    });
+    // Click on the backdrop (outside the dialog box) closes it.
+    faqDialog.addEventListener("click", function (event) {
+      if (event.target === faqDialog) {
+        if (typeof faqDialog.close === "function") {
+          faqDialog.close();
+        } else {
+          faqDialog.removeAttribute("open");
+        }
+      }
+    });
+  }
 });

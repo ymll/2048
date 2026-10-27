@@ -75,16 +75,47 @@ KeyboardInputManager.prototype.listen = function () {
   // .share-button = Instagram image share (native share sheet with
   //   the PNG card, else download the PNG + copy the text)
   // .threads-button is a plain link (href set by HTMLActuator) — no
-  //   JS binding needed.
+  //   JS binding needed for its click, but on touch screens it gets
+  //   an explicit touchend handler: preventDefault() there stops the
+  //   browser from also firing a synthetic click, and the link is
+  //   opened directly, so a tap opens Threads exactly once.
+  //   (The game-container touchstart handler above no longer blocks
+  //   taps on the overlay either — both fixes together are why the
+  //   link works on phones now.)
   // .copy-button = copy the share text to the clipboard.
   this.bindButton(".retry-button", "restart");
   this.bindButton(".keep-playing-button", "keepPlaying");
   this.bindButton(".share-button", "shareInstagram");
   this.bindButton(".copy-button", "copy");
 
+  var threadsButton = document.querySelector(".threads-button");
+  if (threadsButton) {
+    threadsButton.addEventListener("touchend", function (event) {
+      if (event) event.preventDefault();
+      var href = threadsButton.getAttribute("href");
+      if (href && typeof window !== "undefined" &&
+          typeof window.open === "function") {
+        window.open(href, "_blank");
+      }
+    });
+  }
+
   // Listen to swipe events
   var touchStartClientX, touchStartClientY;
   var gameContainer = document.getElementsByClassName("game-container")[0];
+
+  // Touches on the win / game-over overlay (Continue, Start over,
+  // Instagram, Threads, Copy) must keep their normal tap behaviour:
+  // preventDefault() on touchstart stops the browser from ever
+  // firing a click, which is why the Threads link — the only overlay
+  // control without its own touch handler — did nothing on phones.
+  // Swipes on the board itself still get preventDefault() so the
+  // page does not scroll while playing.
+  function touchIsOnOverlay(event) {
+    var target = event.target;
+    if (!target || typeof target.closest !== "function") return false;
+    return !!target.closest(".game-message");
+  }
 
   if (gameContainer) {
     gameContainer.addEventListener("touchstart", function (event) {
@@ -92,11 +123,11 @@ KeyboardInputManager.prototype.listen = function () {
 
       touchStartClientX = event.touches[0].clientX;
       touchStartClientY = event.touches[0].clientY;
-      event.preventDefault();
+      if (!touchIsOnOverlay(event)) event.preventDefault();
     });
 
     gameContainer.addEventListener("touchmove", function (event) {
-      event.preventDefault();
+      if (!touchIsOnOverlay(event)) event.preventDefault();
     });
 
     gameContainer.addEventListener("touchend", function (event) {

@@ -343,12 +343,20 @@ HTMLActuator.prototype.buildShareCard = function (score, maxTile) {
 };
 
 HTMLActuator.prototype.bestScoreValue = function () {
-  if (typeof this.bestScore === "number") return this.bestScore;
-  if (typeof document === "undefined" || !document.querySelector) return 0;
-  var el = document.querySelector(".best-container");
-  if (!el) return 0;
-  var n = parseInt(el.textContent, 10);
-  return isNaN(n) ? 0 : n;
+  // Best can never be below the current score: if the stored best
+  // was lost or stale, the card still shows at least this game's
+  // score instead of 0.
+  var best = 0;
+  if (typeof this.bestScore === "number") best = this.bestScore;
+  if (typeof document !== "undefined" && document.querySelector) {
+    var el = document.querySelector(".best-container");
+    if (el) {
+      var n = parseInt(el.textContent, 10);
+      if (!isNaN(n) && n > best) best = n;
+    }
+  }
+  if (typeof this.score === "number" && this.score > best) best = this.score;
+  return best;
 };
 
 HTMLActuator.prototype.downloadBlob = function (blob, filename) {

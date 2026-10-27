@@ -38,7 +38,7 @@
   </script>
 
   <!-- Structured data for search / AI answers (AEO): what the game is,
-       plus a FAQ. Keep this in sync with the visible FAQ below. -->
+       plus a FAQ. Keep this in sync with the FAQ in the dialog below. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -154,33 +154,41 @@
       <strong class="important">玩法：</strong>用<strong>方向鍵</strong>移動方塊（手機可用手指滑動）。兩個相同方塊碰在一起，就會<strong>合併</strong>！
     </p>
     <hr>
-    <section class="faq" aria-labelledby="faq-heading">
-      <h2 id="faq-heading" data-i18n="faqHeading">常見問題</h2>
-      <h3 data-i18n="faqQ1">甚麼是 CUHK 2048？</h3>
-      <p data-i18n="faqA1">CUHK 2048（中大加強版）是免費的網上 2048 拼圖遊戲，方塊是香港中文大學的書院。合併書院方塊，拼到 2048 的中大，再挑戰 8192 的爆四。</p>
-      <h3 data-i18n="faqQ2">點樣玩？</h3>
-      <p data-i18n="faqA2">用方向鍵移動方塊，手機可以手指滑動。兩個相同書院的方塊碰在一起，就會合併成下一個書院。無路可走時遊戲結束。</p>
-      <h3 data-i18n="faqQ3">書院方塊的順序是怎樣的？</h3>
-      <p data-i18n="faqA3">由細到大是：和聲、伍宜孫、敬文、善衡、晨興、逸夫、聯合、新亞、崇基、走讀、中大、過三、爆四。</p>
-      <h3 data-i18n="faqQ4">點樣先算贏？</h3>
-      <p data-i18n="faqA4">拼到 2048 中大就贏了第一階段 ——「中大歡迎你！」，可以繼續玩；拼到 8192 爆四就是最終勝利 ——「爆四需苦幹！」。爆四之後沒有更大的方塊。</p>
-      <h3 data-i18n="ladderHeading">書院方塊順序</h3>
-      <ol class="college-ladder">
-        <li>2 — 和聲 Woo Sing</li>
-        <li>4 — 伍宜孫 Wu Yee Sun</li>
-        <li>8 — 敬文 CW Chu</li>
-        <li>16 — 善衡 S.H. Ho</li>
-        <li>32 — 晨興 Morningside</li>
-        <li>64 — 逸夫 Shaw</li>
-        <li>128 — 聯合 United</li>
-        <li>256 — 新亞 New Asia</li>
-        <li>512 — 崇基 Chung Chi</li>
-        <li>1024 — 走讀 Day Student</li>
-        <li>2048 — 中大 CUHK</li>
-        <li>4096 — 過三 GPA 3+</li>
-        <li>8192 — 爆四 GPA 4.0</li>
-      </ol>
-    </section>
+    <!-- The FAQ and the college ladder live in a modal, opened by the
+         button below — the tile order is part of the fun, so it stays
+         hidden until the player asks for it. The content is still in
+         the page (inside <dialog>), so search engines can read it. -->
+    <button id="faq-open" class="faq-button" type="button" data-i18n="faqButton">常見問題</button>
+    <dialog id="faq-dialog" class="faq-dialog" aria-labelledby="faq-heading">
+      <section class="faq">
+        <h2 id="faq-heading" data-i18n="faqHeading">常見問題</h2>
+        <h3 data-i18n="faqQ1">甚麼是 CUHK 2048？</h3>
+        <p data-i18n="faqA1">CUHK 2048（中大加強版）是免費的網上 2048 拼圖遊戲，方塊是香港中文大學的書院。合併書院方塊，拼到 2048 的中大，再挑戰 8192 的爆四。</p>
+        <h3 data-i18n="faqQ2">點樣玩？</h3>
+        <p data-i18n="faqA2">用方向鍵移動方塊，手機可以手指滑動。兩個相同書院的方塊碰在一起，就會合併成下一個書院。無路可走時遊戲結束。</p>
+        <h3 data-i18n="faqQ3">書院方塊的順序是怎樣的？</h3>
+        <p data-i18n="faqA3">由細到大是：和聲、伍宜孫、敬文、善衡、晨興、逸夫、聯合、新亞、崇基、走讀、中大、過三、爆四。</p>
+        <h3 data-i18n="faqQ4">點樣先算贏？</h3>
+        <p data-i18n="faqA4">拼到 2048 中大就贏了第一階段 ——「中大歡迎你！」，可以繼續玩；拼到 8192 爆四就是最終勝利 ——「爆四需苦幹！」。爆四之後沒有更大的方塊。</p>
+        <h3 data-i18n="ladderHeading">書院方塊順序</h3>
+        <ol class="college-ladder">
+          <li>2 — 和聲 Woo Sing</li>
+          <li>4 — 伍宜孫 Wu Yee Sun</li>
+          <li>8 — 敬文 CW Chu</li>
+          <li>16 — 善衡 S.H. Ho</li>
+          <li>32 — 晨興 Morningside</li>
+          <li>64 — 逸夫 Shaw</li>
+          <li>128 — 聯合 United</li>
+          <li>256 — 新亞 New Asia</li>
+          <li>512 — 崇基 Chung Chi</li>
+          <li>1024 — 走讀 Day Student</li>
+          <li>2048 — 中大 CUHK</li>
+          <li>4096 — 過三 GPA 3+</li>
+          <li>8192 — 爆四 GPA 4.0</li>
+        </ol>
+      </section>
+      <button id="faq-close" class="faq-close-button" type="button" data-i18n="faqClose">關閉</button>
+    </dialog>
     <hr>
     <p data-i18n="note">
     <strong class="important">注意：</strong>本站<strong>並非</strong> 2048 的官方版本。

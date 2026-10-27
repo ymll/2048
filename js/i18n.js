@@ -66,6 +66,8 @@
       lose: "遊戲結束！你拼到{tile}。",
       shareText: "我在 CUHK 2048 得到 {score} 分，拼到{tile}！",
       faqHeading: "常見問題",
+      faqButton: "常見問題",
+      faqClose: "關閉",
       faqQ1: "甚麼是 CUHK 2048？",
       faqA1: "CUHK 2048（中大加強版）是免費的網上 2048 拼圖遊戲，方塊是香港中文大學的書院。合併書院方塊，拼到 2048 的中大，再挑戰 8192 的爆四。",
       faqQ2: "點樣玩？",
@@ -98,6 +100,8 @@
       lose: "Game over! You reached {tile}.",
       shareText: "I scored {score} points and reached {tile} in CUHK 2048! #CUHK2048",
       faqHeading: "Frequently asked questions",
+      faqButton: "FAQ",
+      faqClose: "Close",
       faqQ1: "What is CUHK 2048?",
       faqA1: "CUHK 2048 is a free online 2048 puzzle game where the tiles are colleges of the Chinese University of Hong Kong. Merge the college tiles to reach CUHK at 2048, then keep going to GPA 4.0 at 8192.",
       faqQ2: "How do you play?",
@@ -152,12 +156,14 @@
   }
 
   function threadsUrl(score, maxTile) {
-    // Threads web intent. Instagram has no equivalent web URL, so it is
-    // handled separately via navigator.share() / clipboard (see
+    // Threads web intent. The text already carries the game URL
+    // (see shareTextWithUrl), and the intent endpoint only takes
+    // "text" — there is no separate "url" parameter.
+    // Instagram has no equivalent web URL, so it is handled
+    // separately via navigator.share() / clipboard (see
     // HTMLActuator.shareToInstagram).
     return "https://www.threads.net/intent/post?text=" +
-      encodeURIComponent(shareTextWithUrl(score, maxTile)) +
-      "&url=" + encodeURIComponent(GAME_URL);
+      encodeURIComponent(shareTextWithUrl(score, maxTile));
   }
 
   function applyLanguage() {
