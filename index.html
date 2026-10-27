@@ -90,6 +90,7 @@
 <body>
   <div class="container">
     <div class="top-bar">
+      <button id="faq-open" class="faq-button" type="button" title="常見問題">?</button>
       <button id="lang-toggle" type="button" title="Switch to English">EN</button>
     </div>
     <div class="heading">
@@ -112,9 +113,8 @@
         <div class="lower">
           <a class="keep-playing-button" data-i18n="keepPlaying">繼續玩</a>
           <a class="retry-button" data-i18n="tryAgain">再玩一次</a>
-          <a class="share-button" data-i18n="shareInstagram">Instagram</a>
+          <a class="share-button" data-i18n="shareScreenshot">Share screenshot</a>
           <a class="threads-button" href="https://www.threads.net/intent/post" target="_blank" rel="noopener">Threads</a>
-          <a class="copy-button" data-i18n="copy">複製</a>
         </div>
       </div>
 
@@ -155,10 +155,10 @@
     </p>
     <hr>
     <!-- The FAQ and the college ladder live in a modal, opened by the
-         button below — the tile order is part of the fun, so it stays
-         hidden until the player asks for it. The content is still in
-         the page (inside <dialog>), so search engines can read it. -->
-    <button id="faq-open" class="faq-button" type="button" data-i18n="faqButton">常見問題</button>
+         "?" icon in the top bar — the tile order is part of the fun,
+         so it stays hidden until the player asks for it. The content
+         is still in the page (inside <dialog>), so search engines
+         can read it. -->
     <dialog id="faq-dialog" class="faq-dialog" aria-labelledby="faq-heading">
       <section class="faq">
         <h2 id="faq-heading" data-i18n="faqHeading">常見問題</h2>

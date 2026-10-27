@@ -55,9 +55,8 @@
       keepPlaying: "繼續玩",
       tryAgain: "再玩一次",
       startOver: "重新開始",
-      shareInstagram: "Instagram",
+      shareScreenshot: "分享截圖",
       threads: "Threads",
-      copy: "複製",
       copied: "已複製！",
       copiedInstagram: "已複製 — 貼到 Instagram",
       imageDownloaded: "圖片已下載 — 去 IG / Threads 分享",
@@ -66,7 +65,7 @@
       lose: "遊戲結束！你拼到{tile}。",
       shareText: "我在 CUHK 2048 得到 {score} 分，拼到{tile}！",
       faqHeading: "常見問題",
-      faqButton: "常見問題",
+      faqButtonTitle: "常見問題",
       faqClose: "關閉",
       faqQ1: "甚麼是 CUHK 2048？",
       faqA1: "CUHK 2048（中大加強版）是免費的網上 2048 拼圖遊戲，方塊是香港中文大學的書院。合併書院方塊，拼到 2048 的中大，再挑戰 8192 的爆四。",
@@ -89,9 +88,8 @@
       keepPlaying: "Continue playing",
       tryAgain: "Try again",
       startOver: "Start over",
-      shareInstagram: "Instagram",
+      shareScreenshot: "Share screenshot",
       threads: "Threads",
-      copy: "Copy",
       copied: "Copied!",
       copiedInstagram: "Copied — paste it in Instagram",
       imageDownloaded: "Image downloaded — post it to IG / Threads",
@@ -100,7 +98,7 @@
       lose: "Game over! You reached {tile}.",
       shareText: "I scored {score} points and reached {tile} in CUHK 2048! #CUHK2048",
       faqHeading: "Frequently asked questions",
-      faqButton: "FAQ",
+      faqButtonTitle: "Frequently asked questions",
       faqClose: "Close",
       faqQ1: "What is CUHK 2048?",
       faqA1: "CUHK 2048 is a free online 2048 puzzle game where the tiles are colleges of the Chinese University of Hong Kong. Merge the college tiles to reach CUHK at 2048, then keep going to GPA 4.0 at 8192.",
@@ -198,6 +196,11 @@
       if (toggle) {
         toggle.textContent = t("toggleLabel");
         toggle.setAttribute("title", t("toggleTitle"));
+      }
+      // The FAQ opener is a "?" icon; its tooltip switches language.
+      var faqOpen = document.getElementById("faq-open");
+      if (faqOpen) {
+        faqOpen.setAttribute("title", t("faqButtonTitle"));
       }
     }
 

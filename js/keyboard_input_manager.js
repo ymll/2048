@@ -82,11 +82,13 @@ KeyboardInputManager.prototype.listen = function () {
   //   (The game-container touchstart handler above no longer blocks
   //   taps on the overlay either — both fixes together are why the
   //   link works on phones now.)
-  // .copy-button = copy the share text to the clipboard.
+  // (The old Copy button was removed: sharing already copies the
+  //   text in its desktop fallback, so a separate Copy button was
+  //   redundant. copyScore/copyTextToClipboard stay for that
+  //   fallback — see HTMLActuator.shareImage.)
   this.bindButton(".retry-button", "restart");
   this.bindButton(".keep-playing-button", "keepPlaying");
   this.bindButton(".share-button", "shareInstagram");
-  this.bindButton(".copy-button", "copy");
 
   var threadsButton = document.querySelector(".threads-button");
   if (threadsButton) {

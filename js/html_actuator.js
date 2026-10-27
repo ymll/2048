@@ -300,17 +300,13 @@ HTMLActuator.prototype.copyTextToClipboard = function (text, button, feedbackKey
   }
 };
 
-// Copy the score text. Used by the Copy button, and as the fallback
-// for Instagram when the native share sheet is unavailable.
+// Copy the score text. Used as the fallback for Instagram when the
+// native share sheet is unavailable (no canvas, or no file sharing).
 HTMLActuator.prototype.copyScore = function (score, maxTile, button, feedbackKey) {
   var text = this.shareTextWithUrl(
     score === undefined ? this.score : score,
     maxTile === undefined ? this.maxTile : maxTile);
-  var btn = button || null;
-  if (!btn && typeof document !== "undefined" && document.querySelector) {
-    btn = document.querySelector(".copy-button");
-  }
-  this.copyTextToClipboard(text, btn, feedbackKey || "copied");
+  this.copyTextToClipboard(text, button || null, feedbackKey || "copied");
 };
 
 // The message shown on the share card for the current overlay:

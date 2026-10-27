@@ -11,7 +11,6 @@ function GameManager(size, InputManager, Actuator, ScoreManager) {
   this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
   this.inputManager.on("share", this.share.bind(this));
   this.inputManager.on("shareInstagram", this.shareInstagram.bind(this));
-  this.inputManager.on("copy", this.copy.bind(this));
 
   // Auto-save: resume a saved game if there is one, otherwise start
   // a new game. A corrupt / missing save just starts a new game.
@@ -85,10 +84,6 @@ GameManager.prototype.share = function () {
 
 GameManager.prototype.shareInstagram = function () {
   this.actuator.shareToInstagram(this.score, this.maxTile);
-};
-
-GameManager.prototype.copy = function () {
-  this.actuator.copyScore(this.score, this.maxTile);
 };
 
 GameManager.prototype.isGameTerminated = function () {

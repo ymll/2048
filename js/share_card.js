@@ -113,8 +113,12 @@
     var highestText = (opts.lang === "en" ? "Highest tile: " : "最高方塊： ") + highestLabel;
     centreText(ctx, highestText, 336, 940, 40);
 
-    // Mini-board: 720 x 720, centred, 4x4 cells of 165px + 20px gaps.
-    var boardX = 180, boardY = 388, boardSize = 720, gap = 20;
+    // Mini-board: 640 x 640, centred, 4x4 cells of 145px + 20px gaps.
+    // The board must end above the footer: boardY + boardSize (1028)
+    // leaves room for the footer line at y 1056. (The first version
+    // used a 720 board, which ran past the bottom of the canvas and
+    // clipped the last row under the footer text.)
+    var boardX = 220, boardY = 388, boardSize = 640, gap = 20;
     var cell = (boardSize - gap * 3) / 4;
     ctx.fillStyle = "#bbada0";
     roundRect(ctx, boardX, boardY, boardSize, boardSize, 18);
@@ -152,7 +156,7 @@
 
     // Footer
     ctx.fillStyle = "#776e65";
-    centreText(ctx, gameUrl + "  #CUHK2048", SIZE - 42, 940, 30);
+    centreText(ctx, gameUrl + "  #CUHK2048", SIZE - 24, 940, 30);
 
     return canvas;
   }

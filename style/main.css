@@ -551,18 +551,25 @@ hr {
    answers can read what the game is, instead of it living only
    in JavaScript. It lives in a modal now: the tile order is part
    of the fun, so it stays hidden until the player asks for it. */
+/* The FAQ opener is a "?" info icon in the top bar, next to the
+   language toggle — a full FAQ button below the game looked odd
+   next to the play area. */
 .faq-button {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 8px 16px;
+  width: 30px;
+  height: 30px;
+  margin-right: 8px;
+  padding: 0;
   background: #8f7a66;
   color: #f9f6f2;
   border: 0;
-  border-radius: 3px;
-  font-size: 15px;
+  border-radius: 50%;
+  font-size: 16px;
   font-weight: bold;
-  cursor: pointer;
-  text-decoration: none; }
+  line-height: 30px;
+  text-align: center;
+  cursor: pointer; }
+  .faq-button:hover {
+    background: #776e65; }
 
 .faq-dialog {
   max-width: 520px;
