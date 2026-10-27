@@ -547,6 +547,28 @@ hr {
 .game-explanation {
   margin-top: 50px; }
 
+/* FAQ / college ladder — plain HTML so search engines and AI
+   answers can read what the game is, instead of it living only
+   in JavaScript. Kept below the game, out of the way while playing. */
+.faq {
+  margin-top: 30px; }
+
+.faq h2 {
+  font-size: 24px;
+  margin: 0 0 10px; }
+
+.faq h3 {
+  font-size: 17px;
+  margin: 18px 0 4px; }
+
+.faq p {
+  margin: 0 0 8px;
+  line-height: 1.6; }
+
+.college-ladder {
+  margin: 8px 0 8px 20px;
+  line-height: 1.6; }
+
 @media screen and (max-width: 520px) {
   html, body {
     font-size: 15px; }

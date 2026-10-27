@@ -64,7 +64,17 @@
       winCuhk: "中大歡迎你！",
       winFinal: "爆四需苦幹！",
       lose: "遊戲結束！你拼到{tile}。",
-      shareText: "我在 CUHK 2048 得到 {score} 分，拼到{tile}！"
+      shareText: "我在 CUHK 2048 得到 {score} 分，拼到{tile}！",
+      faqHeading: "常見問題",
+      faqQ1: "甚麼是 CUHK 2048？",
+      faqA1: "CUHK 2048（中大加強版）是免費的網上 2048 拼圖遊戲，方塊是香港中文大學的書院。合併書院方塊，拼到 2048 的中大，再挑戰 8192 的爆四。",
+      faqQ2: "點樣玩？",
+      faqA2: "用方向鍵移動方塊，手機可以手指滑動。兩個相同書院的方塊碰在一起，就會合併成下一個書院。無路可走時遊戲結束。",
+      faqQ3: "書院方塊的順序是怎樣的？",
+      faqA3: "由細到大是：和聲、伍宜孫、敬文、善衡、晨興、逸夫、聯合、新亞、崇基、走讀、中大、過三、爆四。",
+      faqQ4: "點樣先算贏？",
+      faqA4: "拼到 2048 中大就贏了第一階段 ——「中大歡迎你！」，可以繼續玩；拼到 8192 爆四就是最終勝利 ——「爆四需苦幹！」。爆四之後沒有更大的方塊。",
+      ladderHeading: "書院方塊順序"
     },
     en: {
       toggleLabel: "中文",
@@ -86,7 +96,17 @@
       winCuhk: "Welcome to CUHK!",
       winFinal: "GPA 4.0 — you did it!",
       lose: "Game over! You reached {tile}.",
-      shareText: "I scored {score} points and reached {tile} in CUHK 2048! #CUHK2048"
+      shareText: "I scored {score} points and reached {tile} in CUHK 2048! #CUHK2048",
+      faqHeading: "Frequently asked questions",
+      faqQ1: "What is CUHK 2048?",
+      faqA1: "CUHK 2048 is a free online 2048 puzzle game where the tiles are colleges of the Chinese University of Hong Kong. Merge the college tiles to reach CUHK at 2048, then keep going to GPA 4.0 at 8192.",
+      faqQ2: "How do you play?",
+      faqA2: "Use your arrow keys to move the tiles, or swipe on a touch screen. When two tiles with the same college touch, they merge into the next college. The game ends when no more moves are possible.",
+      faqQ3: "What are the college tiles in order?",
+      faqA3: "From smallest to largest: Woo Sing, Wu Yee Sun, CW Chu, S.H. Ho, Morningside, Shaw, United, New Asia, Chung Chi, Day Student, CUHK, GPA 3+, GPA 4.0.",
+      faqQ4: "How do you win?",
+      faqA4: "Reach 2048 CUHK to win the first stage — “Welcome to CUHK!” — and you can keep playing. Reach 8192 GPA 4.0 for the final win — “GPA 4.0 — you did it!” There is no tile past GPA 4.0.",
+      ladderHeading: "College tiles in order"
     }
   };
 
