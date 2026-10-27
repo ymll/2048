@@ -1,5 +1,3 @@
-var maxscore = 2;
-
 function GameManager(size, InputManager, Actuator, ScoreManager) {
   this.size         = size; // Size of the grid
   this.inputManager = new InputManager;
@@ -11,29 +9,59 @@ function GameManager(size, InputManager, Actuator, ScoreManager) {
   this.inputManager.on("move", this.move.bind(this));
   this.inputManager.on("restart", this.restart.bind(this));
   this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
+  this.inputManager.on("share", this.share.bind(this));
+  this.inputManager.on("shareInstagram", this.shareInstagram.bind(this));
+  this.inputManager.on("copy", this.copy.bind(this));
 
   this.setup();
 }
 
 // Restart the game
 GameManager.prototype.restart = function () {
-  maxscore = 2;
+  this.maxTile = 2;
   this.actuator.continue();
   this.setup();
 };
 
-// Keep playing after winning
+// Keep playing after reaching 2048 (中大) — Stage 1 only.
+// There is no Continue after 8192 (爆四): that is the final win, and
+// keepPlaying is never offered there, so this is only ever called
+// while the Stage 1 overlay is showing.
 GameManager.prototype.keepPlaying = function () {
-  this.keepPlaying = true;
+  if (!this.won2048 || this.won8192) return;
+  this.continued2048 = true;
   this.actuator.continue();
 };
 
+// Share the current score. These do not resume the game: the
+// win / game-over overlay stays up after sharing.
+GameManager.prototype.share = function () {
+  this.actuator.shareScore(this.score, this.maxTile);
+};
+
+GameManager.prototype.shareInstagram = function () {
+  this.actuator.shareToInstagram(this.score, this.maxTile);
+};
+
+GameManager.prototype.copy = function () {
+  this.actuator.copyScore(this.score, this.maxTile);
+};
+
 GameManager.prototype.isGameTerminated = function () {
-  if (this.over || (this.won && !this.keepPlaying)) {
-    return true;
-  } else {
-    return false;
-  }
+  // Paused at Stage 1 (2048) until the player chooses Continue or
+  // Start over; paused for good at Stage 2 (8192); paused on game over.
+  if (this.over) return true;
+  if (this.won8192) return true;
+  if (this.won2048 && !this.continued2048) return true;
+  return false;
+};
+
+// Which celebration, if any, should the overlay show?
+// "cuhk" = reached 2048, "final" = reached 8192, null = neither.
+GameManager.prototype.currentStage = function () {
+  if (this.won8192) return "final";
+  if (this.won2048 && !this.continued2048) return "cuhk";
+  return null;
 };
 
 // Set up the game
@@ -42,8 +70,10 @@ GameManager.prototype.setup = function () {
 
   this.score       = 0;
   this.over        = false;
-  this.won         = false;
-  this.keepPlaying = false;
+  this.won2048     = false;
+  this.won8192     = false;
+  this.continued2048 = false;
+  this.maxTile     = 2;
 
   // Add the initial tiles
   this.addStartTiles();
@@ -78,7 +108,11 @@ GameManager.prototype.actuate = function () {
   this.actuator.actuate(this.grid, {
     score:      this.score,
     over:       this.over,
-    won:        this.won,
+    won:        this.won2048 || this.won8192,
+    won2048:    this.won2048,
+    won8192:    this.won8192,
+    stage:      this.currentStage(),
+    maxTile:    this.maxTile,
     bestScore:  this.scoreManager.get(),
     terminated: this.isGameTerminated()
   });
@@ -142,11 +176,15 @@ GameManager.prototype.move = function (direction) {
           // Update the score
           self.score += merged.value;
 
-          if (merged.value > maxscore)
-            maxscore = merged.value;
+          if (merged.value > self.maxTile) {
+            self.maxTile = merged.value;
+          }
 
-          // The mighty 2048 tile
-          if (merged.value === 8192) self.won = true;
+          // Stage 1: the 2048 tile (中大)
+          if (merged.value === 2048) self.won2048 = true;
+          // Stage 2: the 8192 tile (爆四) — the final win. No tile
+          // past 8192 is ever created as a goal; the game ends here.
+          if (merged.value === 8192) self.won8192 = true;
         } else {
           self.moveTile(tile, positions.farthest);
         }

@@ -119,6 +119,24 @@ hr {
   width: 500px;
   margin: 0 auto; }
 
+/* Language switch, top right. */
+.top-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px; }
+
+#lang-toggle {
+  background: #8f7a66;
+  color: #f9f6f2;
+  border: none;
+  border-radius: 3px;
+  padding: 6px 14px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer; }
+  #lang-toggle:hover {
+    background: #776e65; }
+
 @-webkit-keyframes fade-in {
   0% {
     opacity: 0; }
@@ -190,15 +208,26 @@ hr {
       color: #f9f6f2;
       height: 40px;
       line-height: 42px;
-      margin-left: 9px; }
+      margin-left: 9px;
+      margin-bottom: 9px; }
       .game-container .game-message a.keep-playing-button {
         display: none; }
-    .game-container .game-message.game-won {
+      /* Threads is a link, not a game action: give it the same
+         button look, with a slightly different shade. */
+      .game-container .game-message a.threads-button {
+        background: #6e665e; }
+    /* Stage 1 (2048, 中大): Continue is offered. */
+    .game-container .game-message.game-won-cuhk {
       background: rgba(237, 194, 46, 0.5);
       color: #f9f6f2; }
-      .game-container .game-message.game-won a.keep-playing-button {
+      .game-container .game-message.game-won-cuhk a.keep-playing-button {
         display: inline-block; }
-    .game-container .game-message.game-won, .game-container .game-message.game-over {
+    /* Stage 2 (8192, 爆四): the final win. No Continue — the
+       keep-playing button stays hidden here. */
+    .game-container .game-message.game-won-final {
+      background: rgba(237, 194, 46, 0.5);
+      color: #f9f6f2; }
+    .game-container .game-message.game-won-cuhk, .game-container .game-message.game-won-final, .game-container .game-message.game-over {
       display: block; }
 
 .grid-container {
@@ -361,6 +390,31 @@ hr {
     @media screen and (max-width: 520px) {
       .tile.tile-2048 .tile-inner {
         font-size: 15px; } }
+  .tile.tile-4096 .tile-inner {
+    color: #f9f6f2;
+    background: #e8b921;
+    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.33333);
+    font-size: 35px; }
+  .tile.tile-8192 .tile-inner {
+    color: #f9f6f2;
+    background: #3c3a32;
+    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.33333);
+    font-size: 35px; }
+    @media screen and (max-width: 520px) {
+      .tile.tile-4096 .tile-inner, .tile.tile-8192 .tile-inner {
+        font-size: 15px; } }
+  /* English tile labels are longer than the Chinese names, so
+     centre them with a smaller, wrapping font instead of a
+     single large line. */
+  html[lang="en"] .tile .tile-inner {
+    font-size: 16px !important;
+    line-height: 1.2 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4px;
+    box-sizing: border-box; }
   .tile.tile-super .tile-inner {
     color: #f9f6f2;
     background: #3c3a32;
@@ -586,13 +640,16 @@ hr {
         margin-left: 9px; }
         .game-container .game-message a.keep-playing-button {
           display: none; }
-      .game-container .game-message.game-won {
+      .game-container .game-message.game-won-cuhk,
+      .game-container .game-message.game-won-final {
         background: rgba(237, 194, 46, 0.5);
         color: #f9f6f2; }
-        .game-container .game-message.game-won a.keep-playing-button {
+        .game-container .game-message.game-won-cuhk a.keep-playing-button {
           display: inline-block; }
-      .game-container .game-message.game-won, .game-container .game-message.game-over {
+      .game-container .game-message.game-won-cuhk, .game-container .game-message.game-won-final, .game-container .game-message.game-over {
         display: block; }
+      html[lang="en"] .tile .tile-inner {
+        font-size: 11px !important; }
 
   .grid-container {
     position: absolute;
