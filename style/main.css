@@ -199,9 +199,10 @@ hr {
     .game-container .game-message .lower {
       display: block;
       margin-top: 59px; }
-    .game-container .game-message a {
+    .game-container .game-message button {
       display: inline-block;
       background: #8f7a66;
+      border: 0;
       border-radius: 3px;
       padding: 0 20px;
       text-decoration: none;
@@ -209,14 +210,16 @@ hr {
       height: 40px;
       line-height: 42px;
       margin-left: 9px;
-      margin-bottom: 9px; }
-      .game-container .game-message a.keep-playing-button {
+      margin-bottom: 9px;
+      font: inherit;
+      cursor: pointer; }
+      .game-container .game-message button.keep-playing-button {
         display: none; }
       /* Share screenshot gets a share icon (box with an upward
          arrow) so it reads as a share action. It is a ::before so
          the language switch (which sets textContent) cannot wipe
          it out when the label changes. */
-      .game-container .game-message a.share-button::before {
+      .game-container .game-message button.share-button::before {
         content: "";
         display: inline-block;
         width: 15px;
@@ -228,7 +231,7 @@ hr {
     .game-container .game-message.game-won-cuhk {
       background: rgba(237, 194, 46, 0.5);
       color: #f9f6f2; }
-      .game-container .game-message.game-won-cuhk a.keep-playing-button {
+      .game-container .game-message.game-won-cuhk button.keep-playing-button {
         display: inline-block; }
     /* Stage 2 (8192, 爆四): the final win. No Continue — the
        keep-playing button stays hidden here. */
@@ -718,23 +721,26 @@ hr {
       .game-container .game-message .lower {
         display: block;
         margin-top: 59px; }
-      .game-container .game-message a {
+      .game-container .game-message button {
         display: inline-block;
         background: #8f7a66;
+        border: 0;
         border-radius: 3px;
         padding: 0 20px;
         text-decoration: none;
         color: #f9f6f2;
         height: 40px;
         line-height: 42px;
-        margin-left: 9px; }
-        .game-container .game-message a.keep-playing-button {
+        margin-left: 9px;
+        font: inherit;
+        cursor: pointer; }
+        .game-container .game-message button.keep-playing-button {
           display: none; }
       .game-container .game-message.game-won-cuhk,
       .game-container .game-message.game-won-final {
         background: rgba(237, 194, 46, 0.5);
         color: #f9f6f2; }
-        .game-container .game-message.game-won-cuhk a.keep-playing-button {
+        .game-container .game-message.game-won-cuhk button.keep-playing-button {
           display: inline-block; }
       .game-container .game-message.game-won-cuhk, .game-container .game-message.game-won-final, .game-container .game-message.game-over {
         display: block; }
