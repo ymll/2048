@@ -27,19 +27,19 @@
       // 16384+ tile is never needed and showing a number makes no sense.
     },
     en: {
-      2: "Woo Sing",
-      4: "Wu Yee Sun",
-      8: "CW Chu",
-      16: "S.H. Ho",
-      32: "Morningside",
+      2: "WS",
+      4: "WYS",
+      8: "CWC",
+      16: "SHHO",
+      32: "MC",
       64: "Shaw",
-      128: "United",
-      256: "New Asia",
-      512: "Chung Chi",
+      128: "UC",
+      256: "NA",
+      512: "CC",
       1024: "Day Student",
       2048: "CUHK",
-      4096: "GPA 3+",
-      8192: "GPA 4.0"
+      4096: "Pass 3",
+      8192: "Exceed 4"
     }
   };
 
@@ -48,8 +48,8 @@
       toggleLabel: "EN",
       toggleTitle: "Switch to English",
       update: "已更新至加強版。",
-      updateNote: "<strong>Update:</strong> 手機版已推出。歡迎透過 GitHub 報告問題，或電郵至 <a href=\"mailto:ymll@live.hk\">ymll@live.hk</a>。玩得開心 :)",
-      intro: "加入書院，拼到<strong>中大</strong>！",
+      updateNote: "<strong>Update:</strong> 手機版已推出。歡迎透過 GitHub <a href=\"https://github.com/ymll/2048/issues/new\">報告問題</a>。玩得開心 :)",
+      intro: "加油砌到<strong>中大</strong>！",
       howTo: "<strong class=\"important\">玩法：</strong>用<strong>方向鍵</strong>移動方塊（手機可用手指滑動）。兩個相同方塊碰在一起，就會<strong>合併</strong>！",
       note: "<strong class=\"important\">注意：</strong>本站<strong>並非</strong> 2048 的官方版本。",
       keepPlaying: "繼續玩",
@@ -82,7 +82,7 @@
       toggleLabel: "中文",
       toggleTitle: "切換到中文",
       update: "Updated to the enhanced edition.",
-      updateNote: "<strong>Update:</strong> Mobile version is available. You are welcome to report any bugs through GitHub or send email to <a href=\"mailto:ymll@live.hk\">ymll@live.hk</a>. Enjoy the game :)",
+      updateNote: "<strong>Update:</strong> Mobile version is available. You are welcome to report any bugs by opening a GitHub <a href=\"https://github.com/ymll/2048/issues/new\">issue</a>. Enjoy the game :)",
       intro: "Join the college and get to the <strong>CUHK tile!</strong>",
       howTo: "<strong class=\"important\">How to play:</strong> Use your <strong>arrow keys</strong> to move the tiles (or slide on touch screen with mobile). When two tiles with the same number touch, they <strong>merge into one!</strong>",
       note: "<strong class=\"important\">Note:</strong> This site is <strong>NOT</strong> the official version of 2048.",
@@ -94,7 +94,7 @@
       copiedInstagram: "Copied — paste it in Instagram",
       imageDownloaded: "Image downloaded — post it to IG / Threads",
       winCuhk: "Welcome to CUHK!",
-      winFinal: "GPA 4.0 — you did it!",
+      winFinal: "Exceed 4 — you did it!",
       lose: "Game over! You reached {tile}.",
       shareText: "I scored {score} points and reached {tile} in CUHK 2048! #CUHK2048",
       faqHeading: "Frequently asked questions",
@@ -103,13 +103,13 @@
       restartConfirm: "Start a new game? Your current progress will be lost.",
       faqClose: "Close",
       faqQ1: "What is CUHK 2048?",
-      faqA1: "CUHK 2048 is a free online 2048 puzzle game where the tiles are colleges of the Chinese University of Hong Kong. Merge the college tiles to reach CUHK at 2048, then keep going to GPA 4.0 at 8192.",
+      faqA1: "CUHK 2048 is a free online 2048 puzzle game where the tiles are colleges of the Chinese University of Hong Kong. Merge the college tiles to reach CUHK at 2048, then keep going to Exceed 4 at 8192.",
       faqQ2: "How do you play?",
       faqA2: "Use your arrow keys to move the tiles, or swipe on a touch screen. When two tiles with the same college touch, they merge into the next college. The game ends when no more moves are possible.",
       faqQ3: "What are the college tiles in order?",
-      faqA3: "From smallest to largest: Woo Sing, Wu Yee Sun, CW Chu, S.H. Ho, Morningside, Shaw, United, New Asia, Chung Chi, Day Student, CUHK, GPA 3+, GPA 4.0.",
+      faqA3: "From smallest to largest: WS, WYS, CWC, SHHO, MC, Shaw, UC, NA, CC, Day Student, CUHK, Pass 3, Exceed 4.",
       faqQ4: "How do you win?",
-      faqA4: "Reach 2048 CUHK to win the first stage — “Welcome to CUHK!” — and you can keep playing. Reach 8192 GPA 4.0 for the final win — “GPA 4.0 — you did it!” There is no tile past GPA 4.0.",
+      faqA4: "Reach 2048 CUHK to win the first stage — “Welcome to CUHK!” — and you can keep playing. Reach 8192 Exceed 4 for the final win — “Exceed 4 — you did it!” There is no tile past Exceed 4.",
       ladderHeading: "College tiles in order"
     }
   };
