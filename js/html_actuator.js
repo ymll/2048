@@ -416,12 +416,12 @@ HTMLActuator.prototype.shareImage = function (score, maxTile, button) {
     }
 
     // Desktop / no file sharing: download the PNG and copy the text.
+    // Reuse the copy helper: it falls back to execCommand when the
+    // async clipboard is unavailable or rejects, so the share text
+    // still reaches the user instead of being silently dropped.
+    // (The helper also shows the "image downloaded" feedback.)
     self.downloadBlob(blob, "cuhk-2048.png");
-    if (typeof navigator !== "undefined" && navigator.clipboard &&
-        typeof navigator.clipboard.writeText === "function") {
-      navigator.clipboard.writeText(text).catch(function () {});
-    }
-    self.showTemporaryFeedback(btn, "imageDownloaded", 3000);
+    self.copyTextToClipboard(text, btn, "imageDownloaded");
   });
 };
 
