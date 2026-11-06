@@ -82,7 +82,7 @@
       toggleLabel: "中文",
       toggleTitle: "切換到中文",
       update: "Updated to the enhanced edition.",
-      updateNote: "<strong>Update:</strong> Mobile version is available. You are welcome to report any bugs through GitHub <a href=\"https://github.com/ymll/2048/issues/new\">issue</a>. Enjoy the game :)",
+      updateNote: "<strong>Update:</strong> Mobile version is available. You are welcome to report any bugs by opening a GitHub <a href=\"https://github.com/ymll/2048/issues/new\">issue</a>. Enjoy the game :)",
       intro: "Join the college and get to the <strong>CUHK tile!</strong>",
       howTo: "<strong class=\"important\">How to play:</strong> Use your <strong>arrow keys</strong> to move the tiles (or slide on touch screen with mobile). When two tiles with the same number touch, they <strong>merge into one!</strong>",
       note: "<strong class=\"important\">Note:</strong> This site is <strong>NOT</strong> the official version of 2048.",
