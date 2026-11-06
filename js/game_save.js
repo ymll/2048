@@ -78,14 +78,24 @@
     }
     if (!data || data.v !== SAVE_VERSION) return null;
     if (data.size !== size) return null;
-    if (typeof data.score !== "number" || data.score < 0) return null;
+    if (typeof data.score !== "number" || !Number.isInteger(data.score) ||
+        data.score < 0) return null;
+    // maxTile is always written by serialize; a non-integer one
+    // means the save was tampered with.
+    if (typeof data.maxTile !== "number" ||
+        !Number.isInteger(data.maxTile)) return null;
     if (!Array.isArray(data.tiles) || !data.tiles.length ||
         data.tiles.length > size * size) return null;
     var seen = {};
     for (var i = 0; i < data.tiles.length; i++) {
       var t = data.tiles[i];
-      if (!t || typeof t.x !== "number" || typeof t.y !== "number" ||
+      // Coordinates and tile values must be integers: the bitwise
+      // power-of-two check coerces (2.5 and "4" both pass it), and
+      // a fractional coordinate throws in Grid.insertTile(),
+      // aborting startup instead of starting a fresh game.
+      if (!t || !Number.isInteger(t.x) || !Number.isInteger(t.y) ||
           t.x < 0 || t.x >= size || t.y < 0 || t.y >= size ||
+          typeof t.value !== "number" || !Number.isInteger(t.value) ||
           !isPowerOfTwo(t.value)) return null;
       var key = t.x + "," + t.y;
       if (seen[key]) return null; // two tiles in one cell
