@@ -50,12 +50,35 @@ KeyboardInputManager.prototype.listen = function () {
     65: 3  // A
   };
 
+  // Game shortcuts must not steal keys from focused controls.
+  // Space is how a focused button is activated: without this
+  // check, Space on the restart icon, the "?" icon, the EN toggle
+  // or the FAQ Close button silently restarts the game instead —
+  // no confirmation, and the button itself never fires. Arrow
+  // keys must not move the board while the FAQ dialog is open,
+  // either.
+  function keyboardTargetIsControl(event) {
+    var target = event.target;
+    if (!target) return false;
+    var tag = (target.tagName || "").toLowerCase();
+    if (tag === "button" || tag === "a" || tag === "input" ||
+        tag === "select" || tag === "textarea" ||
+        target.isContentEditable) {
+      return true;
+    }
+    if (typeof target.closest === "function" &&
+        target.closest("dialog")) {
+      return true;
+    }
+    return false;
+  }
+
   document.addEventListener("keydown", function (event) {
     var modifiers = event.altKey || event.ctrlKey || event.metaKey ||
                     event.shiftKey;
     var mapped    = map[event.which];
 
-    if (!modifiers) {
+    if (!modifiers && !keyboardTargetIsControl(event)) {
       if (mapped !== undefined) {
         event.preventDefault();
         self.emit("move", mapped);
