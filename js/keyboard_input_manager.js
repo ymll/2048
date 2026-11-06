@@ -138,6 +138,12 @@ KeyboardInputManager.prototype.listen = function () {
     gameContainer.addEventListener("touchend", function (event) {
       if (event.touches.length > 0) return;
 
+      // Taps on the overlay (Continue / Start over / Share) must
+      // not also swipe the board: the button handler already ran,
+      // and a finger that drifted >10px would otherwise fire an
+      // extra move on the resumed or fresh board (and save it).
+      if (touchIsOnOverlay(event)) return;
+
       var dx = event.changedTouches[0].clientX - touchStartClientX;
       var absDx = Math.abs(dx);
 
