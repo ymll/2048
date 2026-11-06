@@ -39,7 +39,11 @@ LocalScoreManager.prototype.localStorageSupported = function () {
 };
 
 LocalScoreManager.prototype.get = function () {
-  return this.storage.getItem(this.key) || 0;
+  // Always a number: getItem() returns a string, and callers compare
+  // it with the (numeric) score — a string best was silently failing
+  // the typeof "number" check in HTMLActuator, so the share card
+  // showed Best 0.
+  return parseInt(this.storage.getItem(this.key), 10) || 0;
 };
 
 LocalScoreManager.prototype.set = function (score) {
