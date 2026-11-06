@@ -74,6 +74,12 @@ GameManager.prototype.keepPlaying = function () {
   this.actuator.continue();
   // Save, so a reload does not show the Stage 1 pause again.
   this.saveGame();
+  // If the winning move also left no legal moves, the board is
+  // stuck: show game over now, instead of hiding the overlay and
+  // leaving an unresponsive board with nothing on it.
+  if (this.over) {
+    this.actuate();
+  }
 };
 
 // Share the current score. These do not resume the game: the

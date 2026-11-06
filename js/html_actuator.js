@@ -218,11 +218,13 @@ HTMLActuator.prototype.message = function (metadata) {
   metadata = metadata || {};
 
   var type, messageText, retryLabel;
-  if (metadata.over) {
-    type = "game-over";
-    messageText = this.loseMessage(metadata.maxTile || this.maxTile);
-    retryLabel = this.t("tryAgain");
-  } else if (metadata.stage === "cuhk") {
+  // A reached stage takes precedence over game over: a move that
+  // wins 2048 (or 8192) and also leaves no legal moves must still
+  // celebrate the win first — otherwise the player never sees the
+  // 中大 / 爆四 moment they just earned. currentStage() already
+  // returns null once Stage 1 was continued, so a continued-then-
+  // stuck board still falls through to game over below.
+  if (metadata.stage === "cuhk") {
     type = "game-won-cuhk";
     messageText = this.t("winCuhk");
     retryLabel = this.t("startOver");
@@ -230,6 +232,10 @@ HTMLActuator.prototype.message = function (metadata) {
     type = "game-won-final";
     messageText = this.t("winFinal");
     retryLabel = this.t("startOver");
+  } else if (metadata.over) {
+    type = "game-over";
+    messageText = this.loseMessage(metadata.maxTile || this.maxTile);
+    retryLabel = this.t("tryAgain");
   } else {
     return;
   }
@@ -296,9 +302,11 @@ HTMLActuator.prototype.copyScore = function (score, maxTile, button, feedbackKey
 // the stage message on a win, the lose message on game over.
 HTMLActuator.prototype.stageMessage = function (metadata) {
   metadata = metadata || this.lastMetadata || {};
-  if (metadata.over) return this.loseMessage(metadata.maxTile || this.maxTile);
+  // Same precedence as message(): a reached stage is celebrated
+  // even when the same move also left no legal moves.
   if (metadata.stage === "cuhk") return this.t("winCuhk");
   if (metadata.stage === "final") return this.t("winFinal");
+  if (metadata.over) return this.loseMessage(metadata.maxTile || this.maxTile);
   return "CUHK 2048";
 };
 
