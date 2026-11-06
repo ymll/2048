@@ -146,7 +146,7 @@
 
         var label = tileLabel(tile.value);
         ctx.fillStyle = colors.fg;
-        // Long English labels (e.g. "Morningside") shrink to fit.
+        // Long English labels (e.g. "Day Student") shrink to fit.
         fitFont(ctx, label, cell - 16, 52, "bold");
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
