@@ -159,11 +159,32 @@ HTMLActuator.prototype.message = function (won) {
   mytxt[9]="和聲!和聲!和聲!";
   mytxt[10]="URRSH！";
 
-
+  var woosingbeat = [
+      // lose at 伍宜孫 level
+      "我哋DEM返個和聲beat好唔好呀？好！",
+      // lose at 敬文
+      "和～～聲！",
+      // lose at 善衡
+      "和盡天地風雲之聲！",
+      // lose at 晨興
+      "環抱山水日月之景！",
+      // lose at 逸夫
+      "婆娑樹影！人傑地靈！",
+      // lose at 聯合
+      "育和聲一代菁英！",
+      // lose at 新亞
+      "立和聲千秋美名！",
+      // lose at 崇基
+      "和聲！和聲！和聲！",
+      // CUHK
+      "URRSH～！！",
+      // 過三
+      "過三於我如浮雲，浮雲於我如命根！"
+  ];
 
   var text3 = function (m) { var r = 0; while (m > 1) r++, m >>= 1; return r; }
   var type    = won ? "game-won" : "game-over";
-  var message = won ? "爆四需苦幹！" : mytxt[text3(maxscore)-3];
+  var message = won ? "中大歡迎你！" : mytxt[text3(maxscore)-3];
 
   if (typeof ga !== "undefined") {
     ga("send", "event", "game", "end", type, this.score);
