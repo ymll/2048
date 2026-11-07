@@ -43,7 +43,9 @@ self.addEventListener("activate", function (event) {
   event.waitUntil(
     caches.keys().then(function (keys) {
       return Promise.all(keys.filter(function (key) {
-        return key !== CACHE;
+        // CacheStorage is shared by the whole origin (ymll.github.io),
+        // so only delete our own namespace — never another app's cache.
+        return key.indexOf("cuhk2048-") === 0 && key !== CACHE;
       }).map(function (key) {
         return caches.delete(key);
       }));
