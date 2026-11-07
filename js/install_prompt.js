@@ -108,6 +108,13 @@
         deferredPrompt = event;
         if (timerDone) showBanner();
       });
+      // Installing from the browser's own menu bypasses the banner's
+      // Install button: hide the banner and remember, so it never
+      // stays open or asks again after the game is installed.
+      window.addEventListener("appinstalled", function () {
+        deferredPrompt = null;
+        hideBanner(true);
+      });
     }
 
     // Service worker: cache the game shell for offline play.
