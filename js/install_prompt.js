@@ -25,7 +25,12 @@
   }
 
   function isIOS() {
-    return /iphone|ipad|ipod/i.test(window.navigator.userAgent) && !window.MSStream;
+    var ua = window.navigator.userAgent || "";
+    if (/iphone|ipad|ipod/i.test(ua) && !window.MSStream) return true;
+    // iPadOS Safari reports a desktop-style user agent ("Macintosh"),
+    // so also catch touch-capable Macs — a real Mac has no touchscreen.
+    return window.navigator.platform === "MacIntel" &&
+      window.navigator.maxTouchPoints > 1;
   }
 
   function isInstalled() {
