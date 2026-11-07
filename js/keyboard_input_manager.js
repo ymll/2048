@@ -1,6 +1,11 @@
 function KeyboardInputManager() {
   this.events = {};
 
+  // Set by the touch handler when a swipe that started on the win /
+  // game-over overlay ends on a button: the browser still generates
+  // a click there, and the button handler must ignore that one click.
+  this._suppressClick = false;
+
   this.listen();
 }
 
@@ -24,12 +29,20 @@ KeyboardInputManager.prototype.bindButton = function (selector, eventName) {
   var self = this;
   var el = document.querySelector(selector);
   if (!el) return;
-  var handler = function (event) {
+  // Click only. A tap on a button already fires click after touchend,
+  // so a touchend listener as well would fire the action twice
+  // (two restarts, two share sheets).
+  el.addEventListener("click", function (event) {
+    // A swipe that started on the overlay and ended on this button
+    // is not a tap: the touch handler flagged it, so ignore the
+    // click the browser generates for it.
+    if (self._suppressClick) {
+      self._suppressClick = false;
+      return;
+    }
     if (event) event.preventDefault();
     self.emit(eventName);
-  };
-  el.addEventListener("click", handler);
-  el.addEventListener("touchend", handler);
+  });
 };
 
 KeyboardInputManager.prototype.listen = function () {
@@ -142,7 +155,24 @@ KeyboardInputManager.prototype.listen = function () {
       // not also swipe the board: the button handler already ran,
       // and a finger that drifted >10px would otherwise fire an
       // extra move on the resumed or fresh board (and save it).
-      if (touchIsOnOverlay(event)) return;
+      if (touchIsOnOverlay(event)) {
+        // ...but a swipe that STARTED on the overlay is worse than
+        // an extra move: the browser still generates a click where
+        // the finger lifts, so a swipe ending on "Start over"
+        // restarts the game with no confirmation — the board the
+        // player just won is gone. Flag it so the button handler
+        // ignores that one click. A plain tap (no drift) is not
+        // flagged, so the buttons still work.
+        var odx = event.changedTouches[0].clientX - touchStartClientX;
+        var ody = event.changedTouches[0].clientY - touchStartClientY;
+        if (Math.max(Math.abs(odx), Math.abs(ody)) > 10) {
+          self._suppressClick = true;
+          // If no click follows (it normally does, right after
+          // touchend), clear the flag so the next real tap works.
+          window.setTimeout(function () { self._suppressClick = false; }, 500);
+        }
+        return;
+      }
 
       var dx = event.changedTouches[0].clientX - touchStartClientX;
       var absDx = Math.abs(dx);
