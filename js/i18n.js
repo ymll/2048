@@ -76,7 +76,10 @@
       faqA3: "由細到大是：和聲、伍宜孫、敬文、善衡、晨興、逸夫、聯合、新亞、崇基、走讀、中大、過三、爆四。",
       faqQ4: "點樣先算贏？",
       faqA4: "拼到 2048 中大就贏了第一階段 ——「中大歡迎你！」，可以繼續玩；拼到 8192 爆四就是最終勝利 ——「爆四需苦幹！」。爆四之後沒有更大的方塊。",
-      ladderHeading: "書院方塊順序"
+      ladderHeading: "書院方塊順序",
+      installBanner: "在手機安裝 CUHK 2048，隨時開局！",
+      installAction: "安裝",
+      installIos: "將 CUHK 2048 加到主畫面：按分享，再按「加到主畫面」。"
     },
     en: {
       toggleLabel: "中文",
@@ -110,7 +113,10 @@
       faqA3: "From smallest to largest: WS, WYS, CWC, SHHO, MC, Shaw, UC, NA, CC, Day Student, CUHK, Pass 3, Exceed 4.",
       faqQ4: "How do you win?",
       faqA4: "Reach 2048 CUHK to win the first stage — “Welcome to CUHK!” — and you can keep playing. Reach 8192 Exceed 4 for the final win — “Exceed 4 — you did it!” There is no tile past Exceed 4.",
-      ladderHeading: "College tiles in order"
+      ladderHeading: "College tiles in order",
+      installBanner: "Install CUHK 2048 on your phone and play anytime!",
+      installAction: "Install",
+      installIos: "Add CUHK 2048 to your Home Screen: tap Share, then Add to Home Screen."
     }
   };
 
@@ -204,6 +210,11 @@
     // in the new language, if a game is running.
     if (window.gameManager && typeof window.gameManager.actuate === "function") {
       window.gameManager.actuate();
+    }
+
+    // Re-render the install banner text if it is showing.
+    if (typeof window.__cuhk2048_renderInstallBanner === "function") {
+      window.__cuhk2048_renderInstallBanner();
     }
   }
 

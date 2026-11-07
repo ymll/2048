@@ -853,3 +853,47 @@ hr {
     margin-top: 90px !important; }
   .game-message .lower {
     margin-top: 30px !important; } }
+
+/* Install banner: one-time, dismissible, fixed at the bottom. */
+.install-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: #fff;
+  border-top: 1px solid #d8cfc4;
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.12);
+  font-size: 14px;
+  line-height: 1.4;
+  color: #776e65; }
+
+.install-banner[hidden] {
+  display: none; }
+
+.install-banner-text {
+  flex: 1; }
+
+.install-banner-action {
+  flex-shrink: 0;
+  padding: 6px 14px;
+  border: 0;
+  border-radius: 4px;
+  background: #8f7a66;
+  color: #f9f6f2;
+  font-size: 14px;
+  cursor: pointer; }
+
+.install-banner-close {
+  flex-shrink: 0;
+  padding: 2px 8px;
+  border: 0;
+  background: transparent;
+  color: #776e65;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer; }
