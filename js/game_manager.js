@@ -52,8 +52,30 @@ GameManager.prototype.restoreSavedGame = function () {
   return true;
 };
 
-// Restart the game
+// Restart the game. Discarding a live game asks first: the overlay's
+// Start over button and the Space key both come here, and a game that
+// has been won (or has points on the board) is worth an "are you
+// sure". After game over there is nothing to lose, so Try again
+// stays instant. The restart icon already asked in application.js,
+// so it calls restartConfirmed() directly and never sees a second
+// prompt.
 GameManager.prototype.restart = function () {
+  if (!this.over && (this.won2048 || this.won8192 || this.score > 0)) {
+    var message = "Start a new game?";
+    if (this.actuator && typeof this.actuator.t === "function") {
+      message = this.actuator.t("restartConfirm");
+    }
+    if (typeof window !== "undefined" &&
+        typeof window.confirm === "function" &&
+        !window.confirm(message)) {
+      return;
+    }
+  }
+  this.restartConfirmed();
+};
+
+// The unguarded restart: clears the save and starts a fresh game.
+GameManager.prototype.restartConfirmed = function () {
   // Start over clears the save, so a reload does not bring the
   // old game back.
   if (typeof window !== "undefined" && window.CUHK2048Save) {

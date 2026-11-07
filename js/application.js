@@ -25,7 +25,9 @@ window.requestAnimationFrame(function () {
         : "Start a new game?";
       if (typeof window.confirm !== "function" || window.confirm(message)) {
         if (window.gameManager) {
-          window.gameManager.restart();
+          // restartConfirmed(): the icon already asked, so skip the
+          // ask-first check in restart().
+          window.gameManager.restartConfirmed();
         }
       }
     });
