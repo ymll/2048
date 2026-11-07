@@ -2,9 +2,13 @@
 //
 // Caches the game shell (HTML, CSS, JS, icons) so the game loads fast
 // and keeps working offline after the first visit. Same-origin files
-// only; nothing else (analytics, etc.) is cached. Bump CACHE when the
-// cached files change — old caches are deleted on activate.
-var CACHE = "cuhk2048-v1";
+// only; nothing else (analytics, etc.) is cached.
+// Bump CACHE whenever any file in CORE changes: the browser only
+// re-installs this worker when sw.js itself changes, so an unchanged
+// sw.js means players keep the old cached game forever (that is what
+// happened after the 8192 fix — the fix was live, but Chrome kept
+// serving the v1 cache). Old caches are deleted on activate.
+var CACHE = "cuhk2048-v2";
 
 var CORE = [
   "/2048/",
