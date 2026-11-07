@@ -64,11 +64,14 @@ self.addEventListener("fetch", function (event) {
     caches.match(event.request).then(function (hit) {
       if (hit) return hit;
       return fetch(event.request).then(function (response) {
-        // Keep a fresh copy of our own files for offline use.
-        var copy = response.clone();
-        caches.open(CACHE).then(function (cache) {
-          cache.put(event.request, copy);
-        });
+        // Only cache successful responses: a transient 404/503 must
+        // not become the permanent offline answer.
+        if (response.ok) {
+          var copy = response.clone();
+          caches.open(CACHE).then(function (cache) {
+            cache.put(event.request, copy);
+          });
+        }
         return response;
       }).catch(function () {
         // Offline and nothing cached: at least show the game page
