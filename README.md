@@ -16,7 +16,7 @@ There are **two stages to win**, not one:
 
 1. **2048 — 中大**: reach the CUHK tile and the game pauses with “中大歡迎你！”
    (Welcome to CUHK!). You can keep playing from there.
-2. **8192 — 爆四**: reach the final tile for the full win, “爆四需苦幹！”
+2. **8192 — 爆四**: reach the final tile for the full win, “成功爆四！”
    (Exceed 4 — you did it!). The game ends here — there is no tile past 爆四.
 
 ## The college ladder
