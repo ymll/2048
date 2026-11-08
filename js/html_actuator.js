@@ -103,6 +103,7 @@ HTMLActuator.prototype.actuate = function (grid, metadata) {
 
 // Continues the game (both restart and keep playing)
 HTMLActuator.prototype.continue = function () {
+  this.stopConfetti();
   this.clearMessage();
 };
 
@@ -247,6 +248,12 @@ HTMLActuator.prototype.message = function (metadata) {
 
   var retry = this.messageContainer.querySelector(".retry-button");
   if (retry) retry.textContent = retryLabel;
+
+  // Celebrate with confetti on both wins: Stage 1 (2048 / 中大) and
+  // the final win (8192 / 爆四).
+  if (metadata.stage === "cuhk" || metadata.stage === "final") {
+    this.confetti();
+  }
 };
 
 HTMLActuator.prototype.clearMessage = function () {
@@ -256,6 +263,97 @@ HTMLActuator.prototype.clearMessage = function () {
   this.messageContainer.classList.remove("game-won-cuhk");
   this.messageContainer.classList.remove("game-won-final");
   this.messageContainer.classList.remove("game-over");
+};
+
+// Stop any running confetti burst (e.g. when the game is restarted).
+HTMLActuator.prototype.stopConfetti = function () {
+  if (this.confettiCanvas && this.confettiCanvas.parentNode) {
+    this.confettiCanvas.parentNode.removeChild(this.confettiCanvas);
+  }
+  this.confettiCanvas = null;
+};
+
+// Confetti burst for the final win (8192 / 爆四). Colourful rectangles
+// fall across the whole screen on top of everything, then fade away.
+// No external libraries — just a <canvas> and requestAnimationFrame.
+HTMLActuator.prototype.confetti = function () {
+  if (this.confettiCanvas || typeof document === "undefined") return;
+  var self = this;
+
+  var canvas = document.createElement("canvas");
+  canvas.style.position = "fixed";
+  canvas.style.top = "0";
+  canvas.style.left = "0";
+  canvas.style.width = "100%";
+  canvas.style.height = "100%";
+  canvas.style.pointerEvents = "none";
+  canvas.style.zIndex = "10000";
+  document.body.appendChild(canvas);
+  this.confettiCanvas = canvas;
+
+  var ctx = canvas.getContext("2d");
+  var width, height;
+  function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener("resize", resize);
+
+  var colors = [
+    "#f44336", "#e91e63", "#9c27b0", "#673ab7", "#3f51b5",
+    "#2196f3", "#03a9f4", "#00bcd4", "#009688", "#4caf50",
+    "#8bc34a", "#cddc39", "#ffeb3b", "#ffc107", "#ff9800", "#ff5722"
+  ];
+  var particleCount = window.innerWidth < 600 ? 90 : 160;
+  var particles = [];
+  for (var i = 0; i < particleCount; i++) {
+    particles.push({
+      x: Math.random() * width,
+      y: Math.random() * height - height, // start above the screen
+      vx: (Math.random() - 0.5) * 4,
+      vy: Math.random() * 5 + 2,
+      w: Math.random() * 6 + 4,
+      h: Math.random() * 12 + 6,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      angle: Math.random() * Math.PI * 2,
+      spin: (Math.random() - 0.5) * 0.2,
+      gravity: 0.15
+    });
+  }
+
+  var frames = 0;
+  var frameLimit = 900; // roughly 15 seconds at 60 fps
+
+  function animate() {
+    frames++;
+    ctx.clearRect(0, 0, width, height);
+    var alive = false;
+    particles.forEach(function (p) {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += p.gravity;
+      p.vx *= 0.98;
+      p.angle += p.spin;
+      if (p.y < height + 60) {
+        alive = true;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.angle);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx.restore();
+      }
+    });
+    if (alive && frames < frameLimit) {
+      window.requestAnimationFrame(animate);
+    } else {
+      window.removeEventListener("resize", resize);
+      if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
+      self.confettiCanvas = null;
+    }
+  }
+  window.requestAnimationFrame(animate);
 };
 
 HTMLActuator.prototype.copyTextToClipboard = function (text, button, feedbackKey) {
